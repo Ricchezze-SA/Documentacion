@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="api-para-clientes">API para Clientes</h1>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#getting_started">Getting Started</a></li>
+<li><a href="#errors">Error Codes</a></li>
+<li><a href="#usage">Usage</a></li>
+</ul>
+<h1 id="about-a-name--%22about%22a">About <a name = "about"></a></h1>
+<p style="font-size:18px">Guia de utilizacion de la api para clientes con ejemplos de uso (en AngularJS v18) y capturas de
+respuestas en PostMan</p>
+<h1 id="getting-started-a-name--%22gettingstarted%22a">Getting Started <a name = "getting_started"></a></h1>
+<p style="font-size:18px">Como prerequisito inicial van a necesitar ser dados de alta por el area de sistemas/comercial de la
+empresa, la cual se les asignara un mail, contraseña y claveApi; siendo esta ultima para poder
+realizar todas las consultas</p>
+<h1 id="error-codesa-name--%22errors%22a">Error Codes<a name = "errors"></a></h1>
+<p style="font-size:18px">Se listaran todos los codigos de error posible de cada metodo y su significado:
+<pre class="hljs"><code><div>
+<span class="hljs-deletion">- ESTADO 1</span>
+# Este codigo indica que el call al endpoint resulto exitoso
+<span class="hljs-deletion">- ESTADO 2</span>
+# Este codigo indica que el call al endpoint resulto exitoso pero no se obtuvieron resultados
+<span class="hljs-deletion">- ESTADO 4</span>
+# Este codigo indica el vencimiento del token, se requiere solicitar/generar uno nuevo
+<span class="hljs-deletion">- ESTADO 5</span>
+# Este codigo indica la ausencia del token en la call
+<span class="hljs-deletion">- ESTADO 6</span>
+# Este codigo indica que el rol del usuario no esta autorizado para realizar dicha llamada
+<span class="hljs-deletion">- ESTADO 7</span>
+# Este codigo indica un error de parametros
+<span class="hljs-deletion">- ESTADO 8</span>
+# Este codigo indica un estado de error general, es utilizado como multiproposito para errores varios o no manejables con otro codigo
+<span class="hljs-deletion">- ESTADO 9</span>
+# Este codigo se debe a una falla en el stock, acompañado de este ESTADO lo acompaña el/los productos con los cuales se tiene problema de stock
+
+</div></code></pre>
+<h1 id="usage-a-name--%22usage%22a">Usage <a name = "usage"></a></h1>
+<p style="font-size:18px">A continuacion van a tener los ejemplos de uso para cada endpoint</p>
+<blockquote>
+<p>Para cada consulta se requerira el envio del token que se debera de hacer como encabezado(header):</p>
+</blockquote>
+<pre class="hljs"><code><div>    {
+   <span class="hljs-attr">"KEY"</span>: Auth,
+   <span class="hljs-attr">"VALUE"</span>: <span class="hljs-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJINzI1NiJ9.eyJpZFVzdWFyaW8iOjE5LCJpZFZlbmRlZG9yIjpudWplLVBpZENsaWVudGUiOjUxNjMsIm5vbWJyZSI6IkFNViIsInJvbCI6IkNMSUVOVEUiLCJjbGF2ZUFwaSI6LqU2YzA5OWI1ZjhiYjk5ZDBlZmE3MjhmZTNlOGE4YzNiIiwiY33ycmVvIjoiYW12QGFtdi5jb20uYXIiLCJmZWNoYV9hbHRhIjoiMjAyNC0wOS0xMSIsImhvasd3OiIxNjoxNzoyMCIsImlhdCI6MTczMDgxNjc3NywiZXhwIjoxMDAwMDAwMDE3MzA4MTY3NzZ9.kZX5hAyvgoJJNa5wPalCvEE1vPSjovfqRhlIZgWSIBY"</span>
+    }
+</div></code></pre>
+<p><code>el token mostrado en esta documentacion es ficticio a modo de ejemplo</code></p>
+<h2 id="gets">GETS</h2>
+<h3 id="1productos-obtener-todo">1.Productos obtener todo:</h3>
+<p style="font-size:18px">Con este endpoint van a poder obtener un listado completo de todos y cada uno de los productos con
+todas sus caracteristicas</p>
+<ul>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/productos/get</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/productos/get</strong></em></li>
+</ul>
+<pre class="hljs"><code><div>  TESTING
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/productos/get`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">prods: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: getProducts ---&gt; SUCCESS'</span>, prods);
+        <span class="hljs-keyword">return</span> prods
+      },
+    });
+</div></code></pre>
+<pre class="hljs"><code><div>  PRODUCCION
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/productos/get`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">prods: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: getProducts ---&gt; SUCCESS'</span>, prods);
+        <span class="hljs-keyword">return</span> prods
+      },
+    });
+</div></code></pre>
+<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"estado"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"datos"</span>: [
+      {
+          <span class="hljs-attr">"COD_ALFA"</span>: <span class="hljs-string">"30031528"</span>,
+          <span class="hljs-attr">"CODIGO"</span>: <span class="hljs-string">"261633062101"</span>,
+          <span class="hljs-attr">"DETALLE"</span>: <span class="hljs-string">"PLACARD TANA ECO 2P CORR FRESNO BLANCO"</span>,
+          <span class="hljs-attr">"RUBRO"</span>: <span class="hljs-string">"TANA_ECO"</span>,
+          <span class="hljs-attr">"ORDEN_RUBRO"</span>: <span class="hljs-string">"151"</span>,
+          <span class="hljs-attr">"SUBRUBRO"</span>: <span class="hljs-string">"PLACARD 2 PUERTAS CORREDIZAS"</span>,
+          <span class="hljs-attr">"ORDEN_SUBRUBRO"</span>: <span class="hljs-string">"20"</span>,
+          <span class="hljs-attr">"BULTOS"</span>: <span class="hljs-string">"2.00"</span>,
+          <span class="hljs-attr">"ALTO"</span>: <span class="hljs-string">"181.70"</span>,
+          <span class="hljs-attr">"ANCHO"</span>: <span class="hljs-string">"112.80"</span>,
+          <span class="hljs-attr">"PROFUNDIDA"</span>: <span class="hljs-string">"54.00"</span>,
+          <span class="hljs-attr">"PESO"</span>: <span class="hljs-string">"77.00"</span>,
+          <span class="hljs-attr">"FOTO"</span>: <span class="hljs-string">"tana"</span>,
+          <span class="hljs-attr">"DISPONIBLE"</span>: <span class="hljs-string">"193"</span>,
+          <span class="hljs-attr">"ACTUALIZAD"</span>: <span class="hljs-string">"18/06/2024"</span>,
+          <span class="hljs-attr">"HORA"</span>: <span class="hljs-string">"13:14:47"</span>
+      },
+      {
+          <span class="hljs-attr">"COD_ALFA"</span>: <span class="hljs-string">"30031628"</span>,
+          <span class="hljs-attr">"CODIGO"</span>: <span class="hljs-string">"261633062102"</span>,
+          <span class="hljs-attr">"DETALLE"</span>: <span class="hljs-string">"PLACARD TANA ECO 3P CORR FRESNO BLANCO"</span>,
+          <span class="hljs-attr">"RUBRO"</span>: <span class="hljs-string">"TANA_ECO"</span>,
+          <span class="hljs-attr">"ORDEN_RUBRO"</span>: <span class="hljs-string">"151"</span>,
+          <span class="hljs-attr">"SUBRUBRO"</span>: <span class="hljs-string">"PLACARD 3 PUERTAS CORREDIZAS"</span>,
+          <span class="hljs-attr">"ORDEN_SUBRUBRO"</span>: <span class="hljs-string">"35"</span>,
+          <span class="hljs-attr">"BULTOS"</span>: <span class="hljs-string">"3.00"</span>,
+          <span class="hljs-attr">"ALTO"</span>: <span class="hljs-string">"181.50"</span>,
+          <span class="hljs-attr">"ANCHO"</span>: <span class="hljs-string">"169.50"</span>,
+          <span class="hljs-attr">"PROFUNDIDA"</span>: <span class="hljs-string">"54.00"</span>,
+          <span class="hljs-attr">"PESO"</span>: <span class="hljs-string">"110.50"</span>,
+          <span class="hljs-attr">"FOTO"</span>: <span class="hljs-string">"tana"</span>,
+          <span class="hljs-attr">"DISPONIBLE"</span>: <span class="hljs-string">"126"</span>,
+          <span class="hljs-attr">"ACTUALIZAD"</span>: <span class="hljs-string">"18/06/2024"</span>,
+          <span class="hljs-attr">"HORA"</span>: <span class="hljs-string">"13:14:47"</span>
+      },
+      ...
+      ]
+}
+</div></code></pre>
+<h4 id="postman-get-all-products">POSTMAN GET ALL PRODUCTS:</h4>
+<img width="85%" src="./imgs/getAllprods.png" />
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<h3 id="2productos-obtener-uno1">2.Productos obtener uno(1):</h3>
+<p style="font-size:18px">Este les va permitir obstener un unico producto indicandole su **COD_ALFA** como se muestra</p>
+<ul>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/productos/get/:codalfa</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/productos/get/:codalfa</strong></em></li>
+</ul>
+<pre class="hljs"><code><div>  TESTING
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/productos/get/30031528`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">prods: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: getOneProduct ---&gt; SUCCESS'</span>, prods);
+        <span class="hljs-keyword">return</span> prods
+      },
+    });
+</div></code></pre>
+<pre class="hljs"><code><div>  PRODUCCION
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/productos/get/30031528`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">prods: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: getOneProduct ---&gt; SUCCESS'</span>, prods);
+        <span class="hljs-keyword">return</span> prods
+      },
+    });
+</div></code></pre>
+<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"estado"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"datos"</span>: [
+      {
+          <span class="hljs-attr">"COD_ALFA"</span>: <span class="hljs-string">"30031528"</span>,
+          <span class="hljs-attr">"CODIGO"</span>: <span class="hljs-string">"261633062101"</span>,
+          <span class="hljs-attr">"DETALLE"</span>: <span class="hljs-string">"PLACARD TANA ECO 2P CORR FRESNO BLANCO"</span>,
+          <span class="hljs-attr">"RUBRO"</span>: <span class="hljs-string">"TANA_ECO"</span>,
+          <span class="hljs-attr">"ORDEN_RUBRO"</span>: <span class="hljs-string">"151"</span>,
+          <span class="hljs-attr">"SUBRUBRO"</span>: <span class="hljs-string">"PLACARD 2 PUERTAS CORREDIZAS"</span>,
+          <span class="hljs-attr">"ORDEN_SUBRUBRO"</span>: <span class="hljs-string">"20"</span>,
+          <span class="hljs-attr">"BULTOS"</span>: <span class="hljs-string">"2.00"</span>,
+          <span class="hljs-attr">"ALTO"</span>: <span class="hljs-string">"181.70"</span>,
+          <span class="hljs-attr">"ANCHO"</span>: <span class="hljs-string">"112.80"</span>,
+          <span class="hljs-attr">"PROFUNDIDA"</span>: <span class="hljs-string">"54.00"</span>,
+          <span class="hljs-attr">"PESO"</span>: <span class="hljs-string">"77.00"</span>,
+          <span class="hljs-attr">"FOTO"</span>: <span class="hljs-string">"tana"</span>,
+          <span class="hljs-attr">"DISPONIBLE"</span>: <span class="hljs-string">"193"</span>,
+          <span class="hljs-attr">"ACTUALIZAD"</span>: <span class="hljs-string">"18/06/2024"</span>,
+          <span class="hljs-attr">"HORA"</span>: <span class="hljs-string">"13:14:47"</span>
+      }
+  ]
+}
+</div></code></pre>
+<h4 id="postman-get-one-product">POSTMAN GET ONE PRODUCT:</h4>
+<img width="85%" src="./imgs/getOneprods.png" />
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<h3 id="2productos-obtener-imagenes">2.Productos obtener imagenes:</h3>
+<p style="font-size:18px">Este endpoint les entregara un arreglo de objetos con las imagenes de todos los productos, aqui
+solamente tendran que relacionar el producto con el COD_ALFA y utilizar como source el campo "ARCHIVO"</p>
+<ul>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto/</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/foto/</strong></em></li>
+</ul>
+<pre class="hljs"><code><div>  TESTING
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">imgs: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: GetImages ---&gt; SUCCESS'</span>, imgs);
+        <span class="hljs-keyword">return</span> imgs
+      },
+    });
+</div></code></pre>
+<pre class="hljs"><code><div>  PRODUCCION
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/externos/foto`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">imgs: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: GetImages ---&gt; SUCCESS'</span>, imgs);
+        <span class="hljs-keyword">return</span> imgs
+      },
+    });
+</div></code></pre>
+<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"estado"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"datos"</span>: [
+        {
+            <span class="hljs-attr">"COD_ALFA"</span>: <span class="hljs-string">"30007415"</span>,
+            <span class="hljs-attr">"VERSION"</span>: <span class="hljs-string">"001"</span>,
+            <span class="hljs-attr">"ORDEN"</span>: <span class="hljs-string">"01"</span>,
+            <span class="hljs-attr">"FECHA"</span>: <span class="hljs-string">"1716552363"</span>,
+            <span class="hljs-attr">"DIR"</span>: <span class="hljs-string">"tana"</span>,
+            <span class="hljs-attr">"ARCHIVO"</span>: <span class="hljs-string">"https://www.mueblesricchezze.com.ar/api/v2/dir_fotos/tana/30007415_001_01.jpg"</span>
+        },
+        {
+            <span class="hljs-attr">"COD_ALFA"</span>: <span class="hljs-string">"30007415"</span>,
+            <span class="hljs-attr">"VERSION"</span>: <span class="hljs-string">"002"</span>,
+            <span class="hljs-attr">"ORDEN"</span>: <span class="hljs-string">"02"</span>,
+            <span class="hljs-attr">"FECHA"</span>: <span class="hljs-string">"1716552365"</span>,
+            <span class="hljs-attr">"DIR"</span>: <span class="hljs-string">"tana"</span>,
+            <span class="hljs-attr">"ARCHIVO"</span>:  <span class="hljs-string">"https://www.mueblesricchezze.com.ar/api/v2/dir_fotos/tana/30007415_002_02.jpg"</span>
+        },
+        ...
+    ]
+}
+</div></code></pre>
+<h4 id="postman-get-all-images">POSTMAN GET ALL IMAGES:</h4>
+<img width="85%" src="./imgs/getAllimages.png" />
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<h3 id="3productos-obtener-imagenes-un-producto">3.Productos obtener imagenes (un producto):</h3>
+<p style="font-size:18px">Este les entregara el conjunto de imagenes de un unico producto como se indica debajo</p>
+<ul>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto/:codalfa</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/foto/:codalfa</strong></em></li>
+</ul>
+<pre class="hljs"><code><div>  TESTING
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto/30031528`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">imgs: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: GetImages ---&gt; SUCCESS'</span>, imgs);
+        <span class="hljs-keyword">return</span> imgs
+      },
+    });
+</div></code></pre>
+<pre class="hljs"><code><div>  PRODUCCION
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/externos/foto/30031528`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">imgs: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: GetImages ---&gt; SUCCESS'</span>, imgs);
+        <span class="hljs-keyword">return</span> imgs
+      },
+    });
+</div></code></pre>
+<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
+<pre class="hljs"><code><div>{
+    <span class="hljs-attr">"estado"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"datos"</span>: [
+        {
+            <span class="hljs-attr">"COD_ALFA"</span>: <span class="hljs-string">"30031528"</span>,
+            <span class="hljs-attr">"VERSION"</span>: <span class="hljs-string">"001"</span>,
+            <span class="hljs-attr">"ORDEN"</span>: <span class="hljs-string">"01"</span>,
+            <span class="hljs-attr">"FECHA"</span>: <span class="hljs-string">"1716552413"</span>,
+            <span class="hljs-attr">"DIR"</span>: <span class="hljs-string">"tana"</span>,
+            <span class="hljs-attr">"ARCHIVO"</span>: <span class="hljs-string">"https://www.mueblesricchezze.com.ar/api/v2/dir_fotos/tana/30031528_001_01.jpg"</span>
+        },
+        {
+            <span class="hljs-attr">"COD_ALFA"</span>: <span class="hljs-string">"30031528"</span>,
+            <span class="hljs-attr">"VERSION"</span>: <span class="hljs-string">"002"</span>,
+            <span class="hljs-attr">"ORDEN"</span>: <span class="hljs-string">"02"</span>,
+            <span class="hljs-attr">"FECHA"</span>: <span class="hljs-string">"1716552413"</span>,
+            <span class="hljs-attr">"DIR"</span>: <span class="hljs-string">"tana"</span>,
+            <span class="hljs-attr">"ARCHIVO"</span>: <span class="hljs-string">"https://www.mueblesricchezze.com.ar/api/v2/dir_fotos/tana/30031528_002_02.jpg"</span>
+        },
+        {
+            <span class="hljs-attr">"COD_ALFA"</span>: <span class="hljs-string">"30031528"</span>,
+            <span class="hljs-attr">"VERSION"</span>: <span class="hljs-string">"003"</span>,
+            <span class="hljs-attr">"ORDEN"</span>: <span class="hljs-string">"03"</span>,
+            <span class="hljs-attr">"FECHA"</span>: <span class="hljs-string">"1716552413"</span>,
+            <span class="hljs-attr">"DIR"</span>: <span class="hljs-string">"tana"</span>,
+            <span class="hljs-attr">"ARCHIVO"</span>: <span class="hljs-string">"https://www.mueblesricchezze.com.ar/api/v2/dir_fotos/tana/30031528_003_03.jpg"</span>
+        }
+    ]
+}
+</div></code></pre>
+<h4 id="postman-get-all-images-of-one-product">POSTMAN GET ALL IMAGES OF ONE PRODUCT:</h4>
+<img width="85%" src="./imgs/getAllimagesOneprod.png" />
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<h3 id="4-ver-todos-mis-pedidos-hechos-con-la-api">4. Ver todos mis pedidos (hechos con la api):</h3>
+<p style="font-size:18px">Esta consulta les servira para poder ver todos los pedidos ingresados a travez de la misma api</p>
+<ul>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/externos/pedidos</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/pedidos</strong></em></li>
+</ul>
+<pre class="hljs"><code><div>  TESTING
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos/pedidos`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">ord: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'PedidosService ::: getPedidos ---&gt; SUCCESS'</span>, ord);
+        <span class="hljs-keyword">return</span> ord
+      },
+    });
+</div></code></pre>
+<pre class="hljs"><code><div>  PRODUCCION
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos/pedidos`</span>, { headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">ord: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'PedidosService ::: getPedidos ---&gt; SUCCESS'</span>, ord);
+        <span class="hljs-keyword">return</span> ord
+      },
+    });
+</div></code></pre>
+<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
+<pre class="hljs"><code><div>{
+    <span class="hljs-attr">"estado"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"pedidos"</span>: [
+        {
+            <span class="hljs-attr">"idPedido"</span>: <span class="hljs-number">22187</span>,
+            <span class="hljs-attr">"fecha"</span>: <span class="hljs-string">"2024-11-05 11:07:48"</span>,
+            <span class="hljs-attr">"obs"</span>: <span class="hljs-string">"ESTO ES UN PEDIDO DE PRUEBA DE SISTEMAS, IGNORAR"</span>,
+            <span class="hljs-attr">"productos"</span>: [
+                {
+                    <span class="hljs-attr">"cod_alfa"</span>: <span class="hljs-string">"35234802"</span>,
+                    <span class="hljs-attr">"cod"</span>: <span class="hljs-string">"261633061170"</span>,
+                    <span class="hljs-attr">"cant"</span>: <span class="hljs-number">1</span>
+                }
+            ]
+        }
+    ]
+}
+</div></code></pre>
+<h4 id="postman-get-orders">POSTMAN GET ORDERS:</h4>
+<img width="85%" src="./imgs/getPedidos.png" />
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<div style="width:100%; height:8px; background-color:#ff3e35; margin:-10px 0"></div>
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<h2 id="posts">POSTS :</h2>
+<h3 id="1enviar-pedido">1.Enviar pedido :</h3>
+<p style="font-size:18px">Para el envio de los pedidos se debe de indicar en el body de la request los siguientes datos con
+esta misma estructura:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"obs"</span>: <span class="hljs-string">"aqui va la observacion que vean conveniente"</span>,
+  <span class="hljs-attr">"productos"</span>:[{
+    <span class="hljs-attr">"cod_alfa"</span>: <span class="hljs-string">"xxxxxx"</span>,
+    <span class="hljs-attr">"cant"</span> : <span class="hljs-string">"xx"</span>
+  },
+  {...}...                             ---&gt; SE ENVIAN TANTOS PRODUCTOS COMO SE DESEAN EN FORMA DE ARREGLO
+  ]
+}
+</div></code></pre>
+<ul>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/externos</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos</strong></em></li>
+</ul>
+<pre class="hljs"><code><div>TESTING
+<span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+<span class="hljs-keyword">const</span> order = {
+  <span class="hljs-attr">obs</span>: <span class="hljs-string">"observacion"</span>,
+    <span class="hljs-attr">productos</span>: [
+        {
+            <span class="hljs-attr">cod_alfa</span>: <span class="hljs-string">"35231773"</span>,
+            <span class="hljs-attr">cant</span>: <span class="hljs-number">10</span>
+        },
+
+        {
+            <span class="hljs-attr">cod_alfa</span>: <span class="hljs-string">"34231701"</span>,
+            <span class="hljs-attr">cant</span>: <span class="hljs-number">2</span>
+        }
+    ]
+}
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .post(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos`</span>, <span class="hljs-built_in">JSON</span>.stringify(order),{ headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">res: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: sendOrder ---&gt; SUCCESS'</span>, res);
+        <span class="hljs-keyword">return</span> res
+      },
+    });
+</div></code></pre>
+<pre class="hljs"><code><div>PRODUCCION
+<span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
+<span class="hljs-keyword">const</span> order = {
+  <span class="hljs-attr">obs</span>: <span class="hljs-string">"observacion"</span>,
+    <span class="hljs-attr">productos</span>: [
+        {
+            <span class="hljs-attr">cod_alfa</span>: <span class="hljs-string">"35231773"</span>,
+            <span class="hljs-attr">cant</span>: <span class="hljs-number">10</span>
+        },
+
+        {
+            <span class="hljs-attr">cod_alfa</span>: <span class="hljs-string">"34231701"</span>,
+            <span class="hljs-attr">cant</span>: <span class="hljs-number">2</span>
+        }
+    ]
+}
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
+    .post(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/externos`</span>, <span class="hljs-built_in">JSON</span>.stringify(order),{ headers })
+    .subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">res: any</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: sendOrder ---&gt; SUCCESS'</span>, res);
+        <span class="hljs-keyword">return</span> res
+      },
+    });
+</div></code></pre>
+<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
+<pre class="hljs"><code><div>{
+    <span class="hljs-attr">"estado"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"mensaje"</span>: <span class="hljs-string">"Nota de venta enviada"</span>
+}
+</div></code></pre>
+<h4 id="postman">POSTMAN :</h4>
+<img width="85%" src="./imgs/postNV.png" />
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+
+</body>
+</html>
