@@ -9,12 +9,11 @@
 
 # About <a name = "about"></a>
 
-<p style="font-size:18px">El Api fue desarrollada con el fin de proporcionarle a los clientes consultar detalles sobre los prodcutos de manera instantanea con valores en tiempo real, ejemplos de uso en AngularJS v18 y repuestas en PostMan</p>
+<p style="font-size:18px">Esta API ha sido desarrollada para permitir a los clientes consultar detalles de los productos de forma instantánea, con valores en tiempo real. Incluye ejemplos de uso en AngularJS v18 y respuestas en Postman.</p>
 
 # Getting Started <a name = "getting_started"></a>
 
-<p style="font-size:18px">Como prerequisito inicial van a necesitar ser dados de alta por el area de sistemas/comercial de la
-empresa, la cual se les asignara un mail y contraseña; con la cual usaran para logearse y obtener su token</p>
+<p style="font-size:18px">Como requisito previo, es necesario que el área de Sistemas o Comercial de la empresa les registre y les asigne un correo electrónico y una contraseña. Con estas credenciales, podrán iniciar sesión y obtener su token de autenticación.</p>
 
 # Error Codes<a name = "errors"></a>
 
