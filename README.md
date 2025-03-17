@@ -22,9 +22,9 @@
 ```diff
 
 - ESTADO 1
-# Este codigo indica que el call al endpoint resulto exitoso
+# La solicitud al endpoint se procesó correctamente.
 - ESTADO 2
-# Este codigo indica que el call al endpoint resulto exitoso pero no se obtuvieron resultados
+# La solicitud fue exitosa, pero no se encontraron resultados
 - ESTADO 4
 # Este codigo indica el vencimiento del token, se requiere solicitar/generar uno nuevo
 - ESTADO 5
