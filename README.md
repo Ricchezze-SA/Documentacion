@@ -9,14 +9,12 @@
 
 # About <a name = "about"></a>
 
-<p style="font-size:18px">Guia de utilizacion de la api para clientes con ejemplos de uso (en AngularJS v18) y capturas de
-respuestas en PostMan</p>
+<p style="font-size:18px">El Api fue desarrollada con el fin de proporcionarle a los clientes consultar detalles sobre los prodcutos de manera instantanea con valores en tiempo real, ejemplos de uso en AngularJS v18 y repuestas en PostMan</p>
 
 # Getting Started <a name = "getting_started"></a>
 
 <p style="font-size:18px">Como prerequisito inicial van a necesitar ser dados de alta por el area de sistemas/comercial de la
-empresa, la cual se les asignara un mail, contraseña y claveApi; siendo esta ultima para poder
-realizar todas las consultas</p>
+empresa, la cual se les asignara un mail y contraseña; con la cual usaran para logearse y obtener su token</p>
 
 # Error Codes<a name = "errors"></a>
 
@@ -43,16 +41,62 @@ realizar todas las consultas</p>
 
 ```
 
+> Ante la aparicion de algun error no esperado comunicarse con el area de sistemas
+
 # Usage <a name = "usage"></a>
 
 <p style="font-size:18px">A continuacion van a tener los ejemplos de uso para cada endpoint</p>
 
-> Para cada consulta se requerira el envio del token que se debera de hacer como encabezado(header):
+> Para cada consulta se requerira el envio del token que se debera de hacer como
+> encabezado(header) el cual se obtiene luego de hacer el log in:
+
+## LogIn
+
+Metodo Post
+
+- ***https://www.mueblesricchezze.com.ar/api/v2/usuarios/login***
+
+```ts
+    async login(user: any): Promise<any> {
+    const url = `https://www.mueblesricchezze.com.ar/api/v2/usuarios/login`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return lastValueFrom(
+      this.http.post(url, user, { headers }).pipe(
+        tap({
+          next: (response: any) => {
+            console.log(response);
+            return response;
+          },
+        })
+      )
+    )
+  }
+```
+
+<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
+
+```JSON
+{
+    "estado": 1,
+    "mensaje": "Inicio de sesión exitoso",
+    "usuario": "PEPE GRILLO",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzdWFyaW8iOjkwNywiaWRWZW5kZWRvciI6OTA3sCJpZENsaWVudGUiOm51bGwsIm5vbWJyZSI6IlBFUEUgR1JJTExPIiwicm9sIjoiQURNSU4iLCJjbGF2ZUFwaSI6IjNkMjM1MDEzZDRhNzgzYjg2Zjc5ZjFhNjg0ZDYyZjk0IiwiY29ycmVvIjoiZ3JpbGxvQHRlc3QuY29tIiwiZmVjaGFfYWx0YSI6IjIwMjQtMDkxSdAiLCJob3JhIjoiMDg6NTk6NDgiLCJpYXQiOjE3NDIyMTU1MTQsImV4cCI6MTc0MjM0NTExNH0.fOQKzOL1yNQfr2J5Ox20tLCIB65Heqj-sJXsj818cz4"
+}
+
+```
+
+#### POSTMAN LOGIN:
+
+<img width="85%" src="./imgs/logIn.png" />
+
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
 
 ```json
     {
    "KEY": Auth,
-   "VALUE": "eyJ0eXAiOiJKV1QiLCJhbGciOiJINzI1NiJ9.eyJpZFVzdWFyaW8iOjE5LCJpZFZlbmRlZG9yIjpudWplLVBpZENsaWVudGUiOjUxNjMsIm5vbWJyZSI6IkFNViIsInJvbCI6IkNMSUVOVEUiLCJjbGF2ZUFwaSI6LqU2YzA5OWI1ZjhiYjk5ZDBlZmE3MjhmZTNlOGE4YzNiIiwiY33ycmVvIjoiYW12QGFtdi5jb20uYXIiLCJmZWNoYV9hbHRhIjoiMjAyNC0wOS0xMSIsImhvasd3OiIxNjoxNzoyMCIsImlhdCI6MTczMDgxNjc3NywiZXhwIjoxMDAwMDAwMDE3MzA4MTY3NzZ9.kZX5hAyvgoJJNa5wPalCvEE1vPSjovfqRhlIZgWSIBY"
+   "VALUE": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzdWFyaW8iOjkwNywiaWRWZW5kZWRvciI6OTA3LCJpZENsaWVudGUiOm51bGwsIm5vbWJyZSI6IlBFUEUgR1JJTExPIiwicm9sIjoiQURNSU4iLCJjbGF2ZUFwaSI6IjNkMjM1MDEzZDRhNzgzYjg2Zjc5ZjFhNjg0ZDYyZjk0IiwiY29ycmVvIjoiZ3JpbGxvQHRlc3QuY29tIiwiZmVjaGFfYWx0YSI6IjIwMjQtMDktMzAiLCJob3JhIjoiMDg6NTk6NDgiLCJpYXQiOjE3NDIyMTU1MTQsImV4cCI6MTc0MjM0NTExNH0.fOQKzOL1yNQfr2J5Ox20tLCIB65Heqj-sJXsj818cz4"
     }
 ```
 
@@ -65,21 +109,7 @@ realizar todas las consultas</p>
 <p style="font-size:18px">Con este endpoint van a poder obtener un listado completo de todos y cada uno de los productos con
 todas sus caracteristicas</p>
 
-- ***https://www.mueblesricchezze.com.ar/api/test/v2/productos/get***
 - ***https://www.mueblesricchezze.com.ar/api/v2/productos/get***
-
-```Js
-  TESTING
-  const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
-  return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/test/v2/productos/get`, { headers })
-    .subscribe({
-      next: (prods: any) => {
-        console.info('ProductService ::: getProducts ---> SUCCESS', prods);
-        return prods
-      },
-    });
-```
 
 ```Js
   PRODUCCION
@@ -152,21 +182,7 @@ todas sus caracteristicas</p>
 
 <p style="font-size:18px">Este les va permitir obstener un unico producto indicandole su **COD_ALFA** como se muestra</p>
 
-- ***https://www.mueblesricchezze.com.ar/api/test/v2/productos/get/:codalfa***
 - ***https://www.mueblesricchezze.com.ar/api/v2/productos/get/:codalfa***
-
-```Js
-  TESTING
-  const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
-  return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/test/v2/productos/get/30031528`, { headers })
-    .subscribe({
-      next: (prods: any) => {
-        console.info('ProductService ::: getOneProduct ---> SUCCESS', prods);
-        return prods
-      },
-    });
-```
 
 ```Js
   PRODUCCION
@@ -221,21 +237,7 @@ todas sus caracteristicas</p>
 <p style="font-size:18px">Este endpoint les entregara un arreglo de objetos con las imagenes de todos los productos, aqui
 solamente tendran que relacionar el producto con el COD_ALFA y utilizar como source el campo "ARCHIVO"</p>
 
-- ***https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto/***
 - ***https://www.mueblesricchezze.com.ar/api/v2/externos/foto/***
-
-```Js
-  TESTING
-  const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
-  return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto`, { headers })
-    .subscribe({
-      next: (imgs: any) => {
-        console.info('ProductService ::: GetImages ---> SUCCESS', imgs);
-        return imgs
-      },
-    });
-```
 
 ```Js
   PRODUCCION
@@ -288,21 +290,7 @@ solamente tendran que relacionar el producto con el COD_ALFA y utilizar como sou
 
 <p style="font-size:18px">Este les entregara el conjunto de imagenes de un unico producto como se indica debajo</p>
 
-- ***https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto/:codalfa***
 - ***https://www.mueblesricchezze.com.ar/api/v2/externos/foto/:codalfa***
-
-```Js
-  TESTING
-  const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
-  return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto/30031528`, { headers })
-    .subscribe({
-      next: (imgs: any) => {
-        console.info('ProductService ::: GetImages ---> SUCCESS', imgs);
-        return imgs
-      },
-    });
-```
 
 ```Js
   PRODUCCION
@@ -354,161 +342,6 @@ solamente tendran que relacionar el producto con el COD_ALFA y utilizar como sou
 #### POSTMAN GET ALL IMAGES OF ONE PRODUCT:
 
 <img width="85%" src="./imgs/getAllimagesOneprod.png" />
-
-<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
-<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
-
-### 4. Ver todos mis pedidos (hechos con la api):
-
-<p style="font-size:18px">Esta consulta les servira para poder ver todos los pedidos ingresados a travez de la misma api</p>
-
-- ***https://www.mueblesricchezze.com.ar/api/test/v2/externos/pedidos***
-- ***https://www.mueblesricchezze.com.ar/api/v2/externos/pedidos***
-
-```Js
-  TESTING
-  const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
-  return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/test/v2/externos/pedidos`, { headers })
-    .subscribe({
-      next: (ord: any) => {
-        console.info('PedidosService ::: getPedidos ---> SUCCESS', ord);
-        return ord
-      },
-    });
-```
-
-```Js
-  PRODUCCION
-  const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
-  return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/test/v2/externos/pedidos`, { headers })
-    .subscribe({
-      next: (ord: any) => {
-        console.info('PedidosService ::: getPedidos ---> SUCCESS', ord);
-        return ord
-      },
-    });
-```
-
-<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
-
-```JSON
-{
-    "estado": 1,
-    "pedidos": [
-        {
-            "idPedido": 22187,
-            "fecha": "2024-11-05 11:07:48",
-            "obs": "ESTO ES UN PEDIDO DE PRUEBA DE SISTEMAS, IGNORAR",
-            "productos": [
-                {
-                    "cod_alfa": "35234802",
-                    "cod": "261633061170",
-                    "cant": 1
-                }
-            ]
-        }
-    ]
-}
-```
-
-#### POSTMAN GET ORDERS:
-
-<img width="85%" src="./imgs/getPedidos.png" />
-
-<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
-<div style="width:100%; height:8px; background-color:#ff3e35; margin:-10px 0"></div>
-<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
-
-## POSTS :
-
-### 1.Enviar pedido :
-
-<p style="font-size:18px">Para el envio de los pedidos se debe de indicar en el body de la request los siguientes datos con
-esta misma estructura:</p>
-
-```JSON
-{
-  "obs": "aqui va la observacion que vean conveniente",
-  "productos":[{
-    "cod_alfa": "xxxxxx",
-    "cant" : "xx"
-  },
-  {...}...                             ---> SE ENVIAN TANTOS PRODUCTOS COMO SE DESEAN EN FORMA DE ARREGLO
-  ]
-}
-```
-
-- ***https://www.mueblesricchezze.com.ar/api/test/v2/externos***
-- ***https://www.mueblesricchezze.com.ar/api/v2/externos***
-
-```Js
-TESTING
-const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
-const order = {
-  obs: "observacion",
-    productos: [
-        {
-            cod_alfa: "35231773",
-            cant: 10
-        },
-
-        {
-            cod_alfa: "34231701",
-            cant: 2
-        }
-    ]
-}
-  return this.http
-    .post(`https://www.mueblesricchezze.com.ar/api/test/v2/externos`, JSON.stringify(order),{ headers })
-    .subscribe({
-      next: (res: any) => {
-        console.info('ProductService ::: sendOrder ---> SUCCESS', res);
-        return res
-      },
-    });
-```
-
-```Js
-PRODUCCION
-const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
-const order = {
-  obs: "observacion",
-    productos: [
-        {
-            cod_alfa: "35231773",
-            cant: 10
-        },
-
-        {
-            cod_alfa: "34231701",
-            cant: 2
-        }
-    ]
-}
-  return this.http
-    .post(`https://www.mueblesricchezze.com.ar/api/v2/externos`, JSON.stringify(order),{ headers })
-    .subscribe({
-      next: (res: any) => {
-        console.info('ProductService ::: sendOrder ---> SUCCESS', res);
-        return res
-      },
-    });
-```
-
-<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
-
-```JSON
-{
-    "estado": 1,
-    "mensaje": "Nota de venta enviada"
-}
-```
-
-#### POSTMAN :
-
-<img width="85%" src="./imgs/postNV.png" />
 
 <div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
 <div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
