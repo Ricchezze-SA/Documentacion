@@ -374,19 +374,16 @@ code {
 <li><a href="#usage">Usage</a></li>
 </ul>
 <h1 id="about-a-name--%22about%22a">About <a name = "about"></a></h1>
-<p style="font-size:18px">Guia de utilizacion de la api para clientes con ejemplos de uso (en AngularJS v18) y capturas de
-respuestas en PostMan</p>
+<p style="font-size:18px">Esta API ha sido desarrollada para permitir a los clientes consultar detalles de los productos de forma instantánea, con valores en tiempo real. Incluye ejemplos de uso en AngularJS v18 y respuestas en Postman.</p>
 <h1 id="getting-started-a-name--%22gettingstarted%22a">Getting Started <a name = "getting_started"></a></h1>
-<p style="font-size:18px">Como prerequisito inicial van a necesitar ser dados de alta por el area de sistemas/comercial de la
-empresa, la cual se les asignara un mail, contraseña y claveApi; siendo esta ultima para poder
-realizar todas las consultas</p>
+<p style="font-size:18px">Como requisito previo, es necesario que el área de Sistemas o Comercial de la empresa les registre y les asigne un correo electrónico y una contraseña. Con estas credenciales, podrán iniciar sesión y obtener su token de autenticación.</p>
 <h1 id="error-codesa-name--%22errors%22a">Error Codes<a name = "errors"></a></h1>
 <p style="font-size:18px">Se listaran todos los codigos de error posible de cada metodo y su significado:
 <pre class="hljs"><code><div>
 <span class="hljs-deletion">- ESTADO 1</span>
-# Este codigo indica que el call al endpoint resulto exitoso
+# La solicitud al endpoint se procesó correctamente.
 <span class="hljs-deletion">- ESTADO 2</span>
-# Este codigo indica que el call al endpoint resulto exitoso pero no se obtuvieron resultados
+# La solicitud fue exitosa, pero no se encontraron resultados
 <span class="hljs-deletion">- ESTADO 4</span>
 # Este codigo indica el vencimiento del token, se requiere solicitar/generar uno nuevo
 <span class="hljs-deletion">- ESTADO 5</span>
@@ -401,14 +398,52 @@ realizar todas las consultas</p>
 # Este codigo se debe a una falla en el stock, acompañado de este ESTADO lo acompaña el/los productos con los cuales se tiene problema de stock
 
 </div></code></pre>
+<blockquote>
+<p>Ante la aparicion de algun error no esperado comunicarse con el area de sistemas</p>
+</blockquote>
 <h1 id="usage-a-name--%22usage%22a">Usage <a name = "usage"></a></h1>
 <p style="font-size:18px">A continuacion van a tener los ejemplos de uso para cada endpoint</p>
 <blockquote>
-<p>Para cada consulta se requerira el envio del token que se debera de hacer como encabezado(header):</p>
+<p>Para cada consulta se requerira el envio del token que se debera de hacer como
+encabezado(header) el cual se obtiene luego de hacer el log in:</p>
 </blockquote>
+<h2 id="login">LogIn</h2>
+<p>Metodo Post</p>
+<ul>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/usuarios/login</strong></em></li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">async</span> login(user: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">any</span>&gt; {
+    <span class="hljs-keyword">const</span> url = <span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/usuarios/login`</span>;
+    <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span> });
+
+    <span class="hljs-keyword">return</span> lastValueFrom(
+      <span class="hljs-keyword">this</span>.http.post(url, user, { headers }).pipe(
+        tap({
+          next: <span class="hljs-function">(<span class="hljs-params">response: <span class="hljs-built_in">any</span></span>) =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(response);
+            <span class="hljs-keyword">return</span> response;
+          },
+        })
+      )
+    )
+  }
+</div></code></pre>
+<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
+<pre class="hljs"><code><div>{
+    <span class="hljs-attr">"estado"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"mensaje"</span>: <span class="hljs-string">"Inicio de sesión exitoso"</span>,
+    <span class="hljs-attr">"usuario"</span>: <span class="hljs-string">"PEPE GRILLO"</span>,
+    <span class="hljs-attr">"token"</span>: <span class="hljs-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzdWFyaW8iOjkwNywiaWRWZW5kZWRvciI6OTA3sCJpZENsaWVudGUiOm51bGwsIm5vbWJyZSI6IlBFUEUgR1JJTExPIiwicm9sIjoiQURNSU4iLCJjbGF2ZUFwaSI6IjNkMjM1MDEzZDRhNzgzYjg2Zjc5ZjFhNjg0ZDYyZjk0IiwiY29ycmVvIjoiZ3JpbGxvQHRlc3QuY29tIiwiZmVjaGFfYWx0YSI6IjIwMjQtMDkxSdAiLCJob3JhIjoiMDg6NTk6NDgiLCJpYXQiOjE3NDIyMTU1MTQsImV4cCI6MTc0MjM0NTExNH0.fOQKzOL1yNQfr2J5Ox20tLCIB65Heqj-sJXsj818cz4"</span>
+}
+
+</div></code></pre>
+<h4 id="postman-login">POSTMAN LOGIN:</h4>
+<img width="85%" src="./imgs/logIn.png" />
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
+<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
 <pre class="hljs"><code><div>    {
    <span class="hljs-attr">"KEY"</span>: Auth,
-   <span class="hljs-attr">"VALUE"</span>: <span class="hljs-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJINzI1NiJ9.eyJpZFVzdWFyaW8iOjE5LCJpZFZlbmRlZG9yIjpudWplLVBpZENsaWVudGUiOjUxNjMsIm5vbWJyZSI6IkFNViIsInJvbCI6IkNMSUVOVEUiLCJjbGF2ZUFwaSI6LqU2YzA5OWI1ZjhiYjk5ZDBlZmE3MjhmZTNlOGE4YzNiIiwiY33ycmVvIjoiYW12QGFtdi5jb20uYXIiLCJmZWNoYV9hbHRhIjoiMjAyNC0wOS0xMSIsImhvasd3OiIxNjoxNzoyMCIsImlhdCI6MTczMDgxNjc3NywiZXhwIjoxMDAwMDAwMDE3MzA4MTY3NzZ9.kZX5hAyvgoJJNa5wPalCvEE1vPSjovfqRhlIZgWSIBY"</span>
+   <span class="hljs-attr">"VALUE"</span>: <span class="hljs-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZFVzdWFyaW8iOjkwNywiaWRWZW5kZWRvciI6OTA3LCJpZENsaWVudGUiOm51bGwsIm5vbWJyZSI6IlBFUEUgR1JJTExPIiwicm9sIjoiQURNSU4iLCJjbGF2ZUFwaSI6IjNkMjM1MDEzZDRhNzgzYjg2Zjc5ZjFhNjg0ZDYyZjk0IiwiY29ycmVvIjoiZ3JpbGxvQHRlc3QuY29tIiwiZmVjaGFfYWx0YSI6IjIwMjQtMDktMzAiLCJob3JhIjoiMDg6NTk6NDgiLCJpYXQiOjE3NDIyMTU1MTQsImV4cCI6MTc0MjM0NTExNH0.fOQKzOL1yNQfr2J5Ox20tLCIB65Heqj-sJXsj818cz4"</span>
     }
 </div></code></pre>
 <p><code>el token mostrado en esta documentacion es ficticio a modo de ejemplo</code></p>
@@ -417,20 +452,8 @@ realizar todas las consultas</p>
 <p style="font-size:18px">Con este endpoint van a poder obtener un listado completo de todos y cada uno de los productos con
 todas sus caracteristicas</p>
 <ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/productos/get</strong></em></li>
 <li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/productos/get</strong></em></li>
 </ul>
-<pre class="hljs"><code><div>  TESTING
-  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/productos/get`</span>, { headers })
-    .subscribe({
-      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">prods: any</span>) =&gt;</span> {
-        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: getProducts ---&gt; SUCCESS'</span>, prods);
-        <span class="hljs-keyword">return</span> prods
-      },
-    });
-</div></code></pre>
 <pre class="hljs"><code><div>  PRODUCCION
   <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
@@ -493,20 +516,8 @@ todas sus caracteristicas</p>
 <h3 id="2productos-obtener-uno1">2.Productos obtener uno(1):</h3>
 <p style="font-size:18px">Este les va permitir obstener un unico producto indicandole su **COD_ALFA** como se muestra</p>
 <ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/productos/get/:codalfa</strong></em></li>
 <li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/productos/get/:codalfa</strong></em></li>
 </ul>
-<pre class="hljs"><code><div>  TESTING
-  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/productos/get/30031528`</span>, { headers })
-    .subscribe({
-      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">prods: any</span>) =&gt;</span> {
-        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: getOneProduct ---&gt; SUCCESS'</span>, prods);
-        <span class="hljs-keyword">return</span> prods
-      },
-    });
-</div></code></pre>
 <pre class="hljs"><code><div>  PRODUCCION
   <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
@@ -551,20 +562,8 @@ todas sus caracteristicas</p>
 <p style="font-size:18px">Este endpoint les entregara un arreglo de objetos con las imagenes de todos los productos, aqui
 solamente tendran que relacionar el producto con el COD_ALFA y utilizar como source el campo "ARCHIVO"</p>
 <ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto/</strong></em></li>
 <li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/foto/</strong></em></li>
 </ul>
-<pre class="hljs"><code><div>  TESTING
-  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto`</span>, { headers })
-    .subscribe({
-      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">imgs: any</span>) =&gt;</span> {
-        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: GetImages ---&gt; SUCCESS'</span>, imgs);
-        <span class="hljs-keyword">return</span> imgs
-      },
-    });
-</div></code></pre>
 <pre class="hljs"><code><div>  PRODUCCION
   <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
@@ -607,20 +606,8 @@ solamente tendran que relacionar el producto con el COD_ALFA y utilizar como sou
 <h3 id="3productos-obtener-imagenes-un-producto">3.Productos obtener imagenes (un producto):</h3>
 <p style="font-size:18px">Este les entregara el conjunto de imagenes de un unico producto como se indica debajo</p>
 <ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto/:codalfa</strong></em></li>
 <li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/foto/:codalfa</strong></em></li>
 </ul>
-<pre class="hljs"><code><div>  TESTING
-  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos/foto/30031528`</span>, { headers })
-    .subscribe({
-      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">imgs: any</span>) =&gt;</span> {
-        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: GetImages ---&gt; SUCCESS'</span>, imgs);
-        <span class="hljs-keyword">return</span> imgs
-      },
-    });
-</div></code></pre>
 <pre class="hljs"><code><div>  PRODUCCION
   <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
@@ -665,136 +652,6 @@ solamente tendran que relacionar el producto con el COD_ALFA y utilizar como sou
 </div></code></pre>
 <h4 id="postman-get-all-images-of-one-product">POSTMAN GET ALL IMAGES OF ONE PRODUCT:</h4>
 <img width="85%" src="./imgs/getAllimagesOneprod.png" />
-<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
-<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
-<h3 id="4-ver-todos-mis-pedidos-hechos-con-la-api">4. Ver todos mis pedidos (hechos con la api):</h3>
-<p style="font-size:18px">Esta consulta les servira para poder ver todos los pedidos ingresados a travez de la misma api</p>
-<ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/externos/pedidos</strong></em></li>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/pedidos</strong></em></li>
-</ul>
-<pre class="hljs"><code><div>  TESTING
-  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos/pedidos`</span>, { headers })
-    .subscribe({
-      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">ord: any</span>) =&gt;</span> {
-        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'PedidosService ::: getPedidos ---&gt; SUCCESS'</span>, ord);
-        <span class="hljs-keyword">return</span> ord
-      },
-    });
-</div></code></pre>
-<pre class="hljs"><code><div>  PRODUCCION
-  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos/pedidos`</span>, { headers })
-    .subscribe({
-      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">ord: any</span>) =&gt;</span> {
-        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'PedidosService ::: getPedidos ---&gt; SUCCESS'</span>, ord);
-        <span class="hljs-keyword">return</span> ord
-      },
-    });
-</div></code></pre>
-<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
-<pre class="hljs"><code><div>{
-    <span class="hljs-attr">"estado"</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-attr">"pedidos"</span>: [
-        {
-            <span class="hljs-attr">"idPedido"</span>: <span class="hljs-number">22187</span>,
-            <span class="hljs-attr">"fecha"</span>: <span class="hljs-string">"2024-11-05 11:07:48"</span>,
-            <span class="hljs-attr">"obs"</span>: <span class="hljs-string">"ESTO ES UN PEDIDO DE PRUEBA DE SISTEMAS, IGNORAR"</span>,
-            <span class="hljs-attr">"productos"</span>: [
-                {
-                    <span class="hljs-attr">"cod_alfa"</span>: <span class="hljs-string">"35234802"</span>,
-                    <span class="hljs-attr">"cod"</span>: <span class="hljs-string">"261633061170"</span>,
-                    <span class="hljs-attr">"cant"</span>: <span class="hljs-number">1</span>
-                }
-            ]
-        }
-    ]
-}
-</div></code></pre>
-<h4 id="postman-get-orders">POSTMAN GET ORDERS:</h4>
-<img width="85%" src="./imgs/getPedidos.png" />
-<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
-<div style="width:100%; height:8px; background-color:#ff3e35; margin:-10px 0"></div>
-<div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
-<h2 id="posts">POSTS :</h2>
-<h3 id="1enviar-pedido">1.Enviar pedido :</h3>
-<p style="font-size:18px">Para el envio de los pedidos se debe de indicar en el body de la request los siguientes datos con
-esta misma estructura:</p>
-<pre class="hljs"><code><div>{
-  <span class="hljs-attr">"obs"</span>: <span class="hljs-string">"aqui va la observacion que vean conveniente"</span>,
-  <span class="hljs-attr">"productos"</span>:[{
-    <span class="hljs-attr">"cod_alfa"</span>: <span class="hljs-string">"xxxxxx"</span>,
-    <span class="hljs-attr">"cant"</span> : <span class="hljs-string">"xx"</span>
-  },
-  {...}...                             ---&gt; SE ENVIAN TANTOS PRODUCTOS COMO SE DESEAN EN FORMA DE ARREGLO
-  ]
-}
-</div></code></pre>
-<ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/test/v2/externos</strong></em></li>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos</strong></em></li>
-</ul>
-<pre class="hljs"><code><div>TESTING
-<span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
-<span class="hljs-keyword">const</span> order = {
-  <span class="hljs-attr">obs</span>: <span class="hljs-string">"observacion"</span>,
-    <span class="hljs-attr">productos</span>: [
-        {
-            <span class="hljs-attr">cod_alfa</span>: <span class="hljs-string">"35231773"</span>,
-            <span class="hljs-attr">cant</span>: <span class="hljs-number">10</span>
-        },
-
-        {
-            <span class="hljs-attr">cod_alfa</span>: <span class="hljs-string">"34231701"</span>,
-            <span class="hljs-attr">cant</span>: <span class="hljs-number">2</span>
-        }
-    ]
-}
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .post(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/test/v2/externos`</span>, <span class="hljs-built_in">JSON</span>.stringify(order),{ headers })
-    .subscribe({
-      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">res: any</span>) =&gt;</span> {
-        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: sendOrder ---&gt; SUCCESS'</span>, res);
-        <span class="hljs-keyword">return</span> res
-      },
-    });
-</div></code></pre>
-<pre class="hljs"><code><div>PRODUCCION
-<span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
-<span class="hljs-keyword">const</span> order = {
-  <span class="hljs-attr">obs</span>: <span class="hljs-string">"observacion"</span>,
-    <span class="hljs-attr">productos</span>: [
-        {
-            <span class="hljs-attr">cod_alfa</span>: <span class="hljs-string">"35231773"</span>,
-            <span class="hljs-attr">cant</span>: <span class="hljs-number">10</span>
-        },
-
-        {
-            <span class="hljs-attr">cod_alfa</span>: <span class="hljs-string">"34231701"</span>,
-            <span class="hljs-attr">cant</span>: <span class="hljs-number">2</span>
-        }
-    ]
-}
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .post(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/externos`</span>, <span class="hljs-built_in">JSON</span>.stringify(order),{ headers })
-    .subscribe({
-      <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">res: any</span>) =&gt;</span> {
-        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: sendOrder ---&gt; SUCCESS'</span>, res);
-        <span class="hljs-keyword">return</span> res
-      },
-    });
-</div></code></pre>
-<p style="font-size:18px">Este codigo obtendra como resultado en el siguiente JSON</p>
-<pre class="hljs"><code><div>{
-    <span class="hljs-attr">"estado"</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-attr">"mensaje"</span>: <span class="hljs-string">"Nota de venta enviada"</span>
-}
-</div></code></pre>
-<h4 id="postman">POSTMAN :</h4>
-<img width="85%" src="./imgs/postNV.png" />
 <div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
 <div style="width:100%; height:5px; background-color:grey; margin:20px 0"></div>
 
