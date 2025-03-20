@@ -108,13 +108,13 @@ Metodo Post
 <p style="font-size:18px">Con este endpoint van a poder obtener un listado completo de todos y cada uno de los productos con
 todas sus caracteristicas</p>
 
-- ***https://www.mueblesricchezze.com.ar/api/v2/productos/get***
+- ***https://www.mueblesricchezze.com.ar/api/v2/productos/obtenerProductos***
 
 ```Js
   PRODUCCION
   const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
   return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/v2/productos/get`, { headers })
+    .get(`https://www.mueblesricchezze.com.ar/api/v2/productos/obtenerProductos`, { headers })
     .subscribe({
       next: (prods: any) => {
         console.info('ProductService ::: getProducts ---> SUCCESS', prods);
@@ -181,13 +181,13 @@ todas sus caracteristicas</p>
 
 <p style="font-size:18px">Este les va permitir obstener un unico producto indicandole su **COD_ALFA** como se muestra</p>
 
-- ***https://www.mueblesricchezze.com.ar/api/v2/productos/get/:codalfa***
+- ***https://www.mueblesricchezze.com.ar/api/v2/productos/obtenerProductos/:codalfa***
 
 ```Js
   PRODUCCION
   const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
   return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/v2/productos/get/30031528`, { headers })
+    .get(`https://www.mueblesricchezze.com.ar/api/v2/productos/obtenerProductos/30031528`, { headers })
     .subscribe({
       next: (prods: any) => {
         console.info('ProductService ::: getOneProduct ---> SUCCESS', prods);
@@ -236,13 +236,13 @@ todas sus caracteristicas</p>
 <p style="font-size:18px">Este endpoint les entregara un arreglo de objetos con las imagenes de todos los productos, aqui
 solamente tendran que relacionar el producto con el COD_ALFA y utilizar como source el campo "ARCHIVO"</p>
 
-- ***https://www.mueblesricchezze.com.ar/api/v2/externos/foto/***
+- ***https://www.mueblesricchezze.com.ar/api/v2/externos/getImgs/***
 
 ```Js
   PRODUCCION
   const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
   return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/v2/externos/foto`, { headers })
+    .get(`https://www.mueblesricchezze.com.ar/api/v2/externos/getImgs/`, { headers })
     .subscribe({
       next: (imgs: any) => {
         console.info('ProductService ::: GetImages ---> SUCCESS', imgs);
@@ -289,13 +289,13 @@ solamente tendran que relacionar el producto con el COD_ALFA y utilizar como sou
 
 <p style="font-size:18px">Este les entregara el conjunto de imagenes de un unico producto como se indica debajo</p>
 
-- ***https://www.mueblesricchezze.com.ar/api/v2/externos/foto/:codalfa***
+- ***https://www.mueblesricchezze.com.ar/api/v2/externos/getImgs/:codalfa***
 
 ```Js
   PRODUCCION
   const headers = new HttpHeaders({ Auth: 'eyJ0eXAiOiJKV1QiLCJh...' });
   return this.http
-    .get(`https://www.mueblesricchezze.com.ar/api/v2/externos/foto/30031528`, { headers })
+    .get(`https://www.mueblesricchezze.com.ar/api/v2/externos/getImgs/30031528`, { headers })
     .subscribe({
       next: (imgs: any) => {
         console.info('ProductService ::: GetImages ---> SUCCESS', imgs);

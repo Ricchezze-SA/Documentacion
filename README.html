@@ -452,12 +452,12 @@ encabezado(header) el cual se obtiene luego de hacer el log in:</p>
 <p style="font-size:18px">Con este endpoint van a poder obtener un listado completo de todos y cada uno de los productos con
 todas sus caracteristicas</p>
 <ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/productos/get</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/productos/obtenerProductos</strong></em></li>
 </ul>
 <pre class="hljs"><code><div>  PRODUCCION
   <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/productos/get`</span>, { headers })
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/productos/obtenerProductos`</span>, { headers })
     .subscribe({
       <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">prods: any</span>) =&gt;</span> {
         <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: getProducts ---&gt; SUCCESS'</span>, prods);
@@ -516,12 +516,12 @@ todas sus caracteristicas</p>
 <h3 id="2productos-obtener-uno1">2.Productos obtener uno(1):</h3>
 <p style="font-size:18px">Este les va permitir obstener un unico producto indicandole su **COD_ALFA** como se muestra</p>
 <ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/productos/get/:codalfa</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/productos/obtenerProductos/:codalfa</strong></em></li>
 </ul>
 <pre class="hljs"><code><div>  PRODUCCION
   <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/productos/get/30031528`</span>, { headers })
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/productos/obtenerProductos/30031528`</span>, { headers })
     .subscribe({
       <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">prods: any</span>) =&gt;</span> {
         <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: getOneProduct ---&gt; SUCCESS'</span>, prods);
@@ -562,12 +562,12 @@ todas sus caracteristicas</p>
 <p style="font-size:18px">Este endpoint les entregara un arreglo de objetos con las imagenes de todos los productos, aqui
 solamente tendran que relacionar el producto con el COD_ALFA y utilizar como source el campo "ARCHIVO"</p>
 <ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/foto/</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/getImgs/</strong></em></li>
 </ul>
 <pre class="hljs"><code><div>  PRODUCCION
   <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/externos/foto`</span>, { headers })
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/externos/getImgs/`</span>, { headers })
     .subscribe({
       <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">imgs: any</span>) =&gt;</span> {
         <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: GetImages ---&gt; SUCCESS'</span>, imgs);
@@ -606,12 +606,12 @@ solamente tendran que relacionar el producto con el COD_ALFA y utilizar como sou
 <h3 id="3productos-obtener-imagenes-un-producto">3.Productos obtener imagenes (un producto):</h3>
 <p style="font-size:18px">Este les entregara el conjunto de imagenes de un unico producto como se indica debajo</p>
 <ul>
-<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/foto/:codalfa</strong></em></li>
+<li><em><strong>https://www.mueblesricchezze.com.ar/api/v2/externos/getImgs/:codalfa</strong></em></li>
 </ul>
 <pre class="hljs"><code><div>  PRODUCCION
   <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> HttpHeaders({ <span class="hljs-attr">Auth</span>: <span class="hljs-string">'eyJ0eXAiOiJKV1QiLCJh...'</span> });
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http
-    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/externos/foto/30031528`</span>, { headers })
+    .get(<span class="hljs-string">`https://www.mueblesricchezze.com.ar/api/v2/externos/getImgs/30031528`</span>, { headers })
     .subscribe({
       <span class="hljs-attr">next</span>: <span class="hljs-function">(<span class="hljs-params">imgs: any</span>) =&gt;</span> {
         <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'ProductService ::: GetImages ---&gt; SUCCESS'</span>, imgs);
